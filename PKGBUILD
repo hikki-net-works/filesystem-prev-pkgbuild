@@ -3,7 +3,7 @@
 
 pkgname=filesystem
 pkgver=2010.02
-pkgrel=2
+pkgrel=3
 pkgdesc="Base filesystem"
 arch=('any')
 license=('GPL')
