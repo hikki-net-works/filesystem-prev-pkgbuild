@@ -2,7 +2,7 @@
 
 pkgname=filesystem
 pkgver=2012.2
-pkgrel=2
+pkgrel=3
 pkgdesc='Base filesystem'
 arch=('any')
 license=('GPL')
@@ -42,7 +42,7 @@ package() {
 		install -m600 ${srcdir}/${f} etc/
 	done
 	touch etc/arch-release
-	install -D -m644 ${srcdir}/modprobe.d.usb-load-ehci-first lib/modprobe.d/usb-load-ehci-first.conf
+	install -D -m644 ${srcdir}/modprobe.d.usb-load-ehci-first usr/lib/modprobe.d/usb-load-ehci-first.conf
 
 	# setup /var
 	for d in cache/man local opt log/old lib/misc empty run; do
