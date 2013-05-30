@@ -1,8 +1,8 @@
 # Maintainer: Tom Gundersen <teg@jklm.no>
 
 pkgname=filesystem
-pkgver=2013.03
-pkgrel=2
+pkgver=2013.05
+pkgrel=1
 pkgdesc='Base filesystem'
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -87,7 +87,7 @@ package() {
 	#
 	# setup /usr hierarchy
 	#
-	for d in bin include lib sbin share/misc src; do
+	for d in bin include lib share/misc src; do
 		install -d -m755 usr/${d}
 	done
 	for d in $(seq 8); do
@@ -102,6 +102,13 @@ package() {
 		ln -s usr/lib ${pkgdir}/lib64
 		ln -s lib ${pkgdir}/usr/lib64
 	)
+
+	#
+	# add bin symlinks
+	#
+	ln -s usr/bin ${pkgdir}/bin
+	ln -s usr/bin ${pkgdir}/sbin
+	ln -s bin ${pkgdir}/usr/sbin
 
 	#
 	# install archlinux(7) manpage
