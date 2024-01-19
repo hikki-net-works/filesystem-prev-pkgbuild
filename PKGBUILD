@@ -1,8 +1,9 @@
+# Maintainer: David Runge <dvzrv@archlinux.org>
 # Maintainer: Sébastien Luttringer
 # Contributor: Tom Gundersen <teg@jklm.no>
 
 pkgname=filesystem
-pkgver=2023.09.18
+pkgver=2024.01.19
 pkgrel=1
 pkgdesc='Base Arch Linux files'
 arch=('any')
@@ -29,7 +30,7 @@ sha256sums=('e03bede3d258d680548696623d5979c6edf03272e801a813c81ba5a5c64f4f82'
             '785c6c3614a27ae6115a27c1ca55bbf333654780997c4ba7e181172b021d1bf3'
             '8ca2d8eef6fb5143c9ef7e9174ccfef59ac7ad2deee243574cd10c763156cc10'
             'c8ee7a9faf798caab178ec51afae4146f1efd8a716b7acedf28345b6c75f9697'
-            '61ea8c4efb3608cf932a3d1cc03d21736c6aacc8f29db6597960f37c6eef89d0'
+            '71ff7a6e248d9a0718344c957ec709cb6f0b18631682fa404d7cff2af3ff341d'
             '8f08231922fe185d3132f9aedded5cd688fb7c482a6f6f272402ded82fa4849a'
             '13e2783884783ef46b8345fbcdf7880f0414c0a9c42e2b2fc6a2b048cbc2d86e'
             '5557d8e601b17a80d1ea7de78a9869be69637cb6a02fbfe334e22fdf64e61d4c'
