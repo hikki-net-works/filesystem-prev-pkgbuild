@@ -14,11 +14,10 @@ backup=('etc/crypttab' 'etc/fstab' 'etc/group' 'etc/gshadow' 'etc/host.conf'
         'etc/hosts' 'etc/issue' 'etc/ld.so.conf' 'etc/nsswitch.conf'
         'etc/passwd' 'etc/profile' 'etc/resolv.conf' 'etc/securetty'
         'etc/shadow' 'etc/shells' 'etc/subuid' 'etc/subgid')
-source=('crypttab' 'env-generator' 'fstab' 'group' 'gshadow' 'host.conf' 'hosts'
-        'issue' 'ld.so.conf' 'locale.sh' 'nsswitch.conf' 'os-release' 'profile'
-        'passwd' 'resolv.conf' 'securetty' 'shadow' 'shells' 'sysctl' 'sysusers'
-        'tmpfiles' 'subuid' 'subgid' 'archlinux-logo.svg' 'archlinux-logo.png'
-        'archlinux-logo-text.svg' 'archlinux-logo-text-dark.svg')
+source=('arch-release' 'crypttab' 'env-generator' 'fstab' 'group' 'gshadow' 'host.conf' 'hosts' 'issue' 'ld.so.conf'
+        'locale.sh' 'nsswitch.conf' 'os-release' 'profile' 'passwd' 'resolv.conf' 'securetty' 'shadow' 'shells' 'sysctl'
+        'sysusers' 'tmpfiles' 'subuid' 'subgid' 'archlinux-logo.svg' 'archlinux-logo.png' 'archlinux-logo-text.svg'
+        'archlinux-logo-text-dark.svg')
 sha256sums=('e03bede3d258d680548696623d5979c6edf03272e801a813c81ba5a5c64f4f82'
             'ed0cb4f1db4021f8c3b5ce78fdf91d2c0624708f58f36c9cf867f4d93c3bc6da'
             'e54626e74ed8fee4173b62a545ab1c3a3a069e4217a0ee8fc398d9933e9c1696'
@@ -39,7 +38,7 @@ sha256sums=('e03bede3d258d680548696623d5979c6edf03272e801a813c81ba5a5c64f4f82'
             'ec289c03aa0d150e90e8287f001c8e6552ab9dd54f450bdb5c2d2254e477965b'
             '89e43a0b7028f52d5c8e7fb961d962c4b4f4e9595880a6157274ddb2c7c0b6b4'
             '30b97e8f5965744138f7a394e04454db6d509fb89e0a9b615bcd9037df3d6f2a'
-            '5d8e61479f0093852365090e84d8d95b1e7fccfab068274ee25863bde6ff3e07'
+            '01d1aeb2cb35965074943bb99a4bb646959e0270a81dcd6af9a7b1c092fb3524'
             'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
             'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
             '3ffe8ea4e98db43a3ec4dcca55fd4009cd8b8d220f0996aef7a5b427fdf65234'
@@ -48,8 +47,9 @@ sha256sums=('e03bede3d258d680548696623d5979c6edf03272e801a813c81ba5a5c64f4f82'
             '96e3cc81623c0537a19799f9eefa966fe46ff5f28a9dc7af1187990973baa127')
 
 package() {
-  local group link mode user
+  local group link mode source_file user
   declare -A directories
+  declare -A files
   declare -A symlinks
 
   # associative array with directories and their assigned mode, user and group
@@ -127,6 +127,57 @@ package() {
     symlinks["usr/lib64"]="lib"
   }
 
+  # associative array of target files, their source file, file mode, user and group ownership
+  files=(
+    ["etc/arch-release"]="arch-release:644:0:0"
+    ["etc/crypttab"]="crypttab:600:0:0"
+    ["etc/fstab"]="fstab:644:0:0"
+    ["etc/group"]="group:644:0:0"
+    ["etc/gshadow"]="gshadow:600:0:0"
+    ["etc/host.conf"]="host.conf:644:0:0"
+    ["etc/hosts"]="hosts:644:0:0"
+    ["etc/issue"]="issue:644:0:0"
+    ["etc/ld.so.conf"]="ld.so.conf:644:0:0"
+    ["etc/nsswitch.conf"]="nsswitch.conf:644:0:0"
+    ["etc/passwd"]="passwd:644:0:0"
+    ["etc/profile"]="profile:644:0:0"
+    ["etc/profile.d/locale.sh"]="locale.sh:644:0:0"
+    ["etc/resolv.conf"]="resolv.conf:644:0:0"
+    ["etc/securetty"]="securetty:644:0:0"
+    ["etc/shells"]="shells:644:0:0"
+    ["etc/shadow"]="shadow:600:0:0"
+    ["etc/subgid"]="subgid:644:0:0"
+    ["etc/subuid"]="subuid:644:0:0"
+    ["usr/lib/os-release"]="os-release:644:0:0"
+    ["usr/lib/sysctl.d/10-arch.conf"]="sysctl:644:0:0"
+    ["usr/lib/sysusers.d/arch.conf"]="sysusers:644:0:0"
+    ["usr/lib/tmpfiles.d/arch.conf"]="tmpfiles:644:0:0"
+    ["usr/lib/systemd/system-environment-generators/10-arch"]="env-generator:755:0:0"
+    ["usr/share/factory/etc/arch-release"]="arch-release:644:0:0"
+    ["usr/share/factory/etc/crypttab"]="crypttab:600:0:0"
+    ["usr/share/factory/etc/fstab"]="fstab:644:0:0"
+    ["usr/share/factory/etc/group"]="group:644:0:0"
+    ["usr/share/factory/etc/gshadow"]="gshadow:600:0:0"
+    ["usr/share/factory/etc/host.conf"]="host.conf:644:0:0"
+    ["usr/share/factory/etc/hosts"]="hosts:644:0:0"
+    ["usr/share/factory/etc/issue"]="issue:644:0:0"
+    ["usr/share/factory/etc/ld.so.conf"]="ld.so.conf:644:0:0"
+    ["usr/share/factory/etc/nsswitch.conf"]="nsswitch.conf:644:0:0"
+    ["usr/share/factory/etc/passwd"]="passwd:644:0:0"
+    ["usr/share/factory/etc/profile"]="profile:644:0:0"
+    ["usr/share/factory/etc/profile.d/locale.sh"]="locale.sh:644:0:0"
+    ["usr/share/factory/etc/resolv.conf"]="resolv.conf:644:0:0"
+    ["usr/share/factory/etc/securetty"]="securetty:644:0:0"
+    ["usr/share/factory/etc/shadow"]="shadow:600:0:0"
+    ["usr/share/factory/etc/shells"]="shells:644:0:0"
+    ["usr/share/factory/etc/subgid"]="subgid:644:0:0"
+    ["usr/share/factory/etc/subuid"]="subuid:644:0:0"
+    ["usr/share/pixmaps/archlinux-logo.png"]="archlinux-logo.png:644:0:0"
+    ["usr/share/pixmaps/archlinux-logo.svg"]="archlinux-logo.svg:644:0:0"
+    ["usr/share/pixmaps/archlinux-logo-text.svg"]="archlinux-logo-text.svg:644:0:0"
+    ["usr/share/pixmaps/archlinux-logo-text-dark.svg"]="archlinux-logo-text-dark.svg:644:0:0"
+  )
+
   cd "$pkgdir"
 
   for dir in "${!directories[@]}"; do
@@ -141,34 +192,14 @@ package() {
     ln -sv "${symlinks[$link]}" "$link"
   done
 
-  for f in fstab group host.conf hosts issue ld.so.conf nsswitch.conf \
-  passwd resolv.conf securetty shells profile subuid subgid; do
-    install -m644 "$srcdir"/$f etc/
-    install -m644 "$srcdir"/$f usr/share/factory/etc/
+  for target_file in "${!files[@]}"; do
+    source_file="$(cut -f 1 -d ':' <<< "${files[$target_file]}")"
+    mode="$(cut -f 2 -d ':' <<< "${files[$target_file]}")"
+    user="$(cut -f 3 -d ':' <<< "${files[$target_file]}")"
+    group="$(cut -f 4 -d ':' <<< "${files[$target_file]}")"
+
+    install -vDm "$mode" -o "$user" -g "$group" "$srcdir/$source_file" "$target_file"
   done
-
-  for f in gshadow shadow crypttab; do
-    install -m600 "$srcdir"/$f etc/
-    install -m600 "$srcdir"/$f usr/share/factory/etc/
-  done
-  touch etc/arch-release
-  install -m644 "$srcdir"/locale.sh etc/profile.d/locale.sh
-  install -Dm644 "$srcdir"/os-release usr/lib/os-release
-
-  # setup systemd-sysctl
-  install -D -m644 "$srcdir"/sysctl usr/lib/sysctl.d/10-arch.conf
-
-  # setup systemd-sysusers
-  install -D -m644 "$srcdir"/sysusers usr/lib/sysusers.d/arch.conf
-
-  # setup systemd-tmpfiles
-  install -D -m644 "$srcdir"/tmpfiles usr/lib/tmpfiles.d/arch.conf
-
-  # setup systemd.environment-generator
-  install -D -m755 "$srcdir"/env-generator usr/lib/systemd/system-environment-generators/10-arch
-
-  # add logo
-  install -D -m644 "$srcdir"/archlinux-logo{.png,.svg,-text.svg,-text-dark.svg} usr/share/pixmaps
 }
 
 # vim:set ts=2 sw=2 et:
