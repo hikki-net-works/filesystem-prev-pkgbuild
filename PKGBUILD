@@ -2,14 +2,16 @@
 # Maintainer: Sébastien Luttringer
 # Contributor: Tom Gundersen <teg@jklm.no>
 
-pkgname=filesystem
-pkgver=2025.05.03
+_pkgname=filesystem
+pkgname=filesystem-prev
+pkgver=2024.11.21
 pkgrel=1
 pkgdesc='Base Arch Linux files'
 arch=('any')
 license=('GPL-3.0-or-later')
 url='https://archlinux.org'
 depends=('iana-etc')
+provides=(filesystem)
 backup=(
   'etc/crypttab'
   'etc/fstab'
@@ -164,7 +166,7 @@ package() {
     ["var/mail"]="spool/mail"
     ["var/run"]="../run"
   )
-  [[ $CARCH = 'x86_64' ]] && {
+  [[ -z "${CARCH//x86_64*/}" ]] && {
     symlinks["lib64"]="usr/lib"
     symlinks["usr/lib64"]="lib"
   }

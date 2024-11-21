@@ -1,11 +1,12 @@
-pkgbase = filesystem
+pkgbase = filesystem-prev
 	pkgdesc = Base Arch Linux files
-	pkgver = 2025.05.03
+	pkgver = 2024.11.21
 	pkgrel = 1
 	url = https://archlinux.org
 	arch = any
 	license = GPL-3.0-or-later
 	depends = iana-etc
+	provides = filesystem
 	backup = etc/crypttab
 	backup = etc/fstab
 	backup = etc/group
@@ -80,4 +81,4 @@ pkgbase = filesystem
 	sha256sums = e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 	sha256sums = e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 
-pkgname = filesystem
+pkgname = filesystem-prev
